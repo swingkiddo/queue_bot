@@ -72,7 +72,7 @@ class Bot(commands.Bot):
 
     async def kick_from_queue(self, target):
         print(self.queue)
-        self.queue.remove(target)
+        self.queue.remove(target.lstrip("@").lower())
         await self.list_queue()
     
     async def call_from_queue(self):
