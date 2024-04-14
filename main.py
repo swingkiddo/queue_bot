@@ -45,9 +45,9 @@ class Bot(commands.Bot):
         
         if command_name in admin_commands and int(author.id) == self.user_id:
             args = ()
-            # if len(content) == 2:
-            #     target = content[1]
-            #     args = (target, )
+            if len(content) == 2:
+                target = content[1]
+                args = (target, )
             command = admin_commands[command_name]
             await command(*args)
 
