@@ -1,4 +1,5 @@
 import config
+import random
 
 from twitchio.ext import commands
 
@@ -32,7 +33,8 @@ class Bot(commands.Bot):
         admin_commands = {
             "!kick": self.kick_from_queue,
             "!next": self.call_from_queue,
-            "!reset": self.reset_queue
+            "!reset": self.reset_queue,
+            "!random": self.random
         }
 
         content = message.content.split(" ")
@@ -84,6 +86,12 @@ class Bot(commands.Bot):
         
     async def reset_queue(self):
         self.queue = []
+        await self.list_queue()
+    
+    async def random(self):
+        player = random.choice(self.queue)
+        self.queue.remove(player)
+        await self.connected_channels[0].send(f"Следующий: {player}")
         await self.list_queue()
 
 bot = Bot()
