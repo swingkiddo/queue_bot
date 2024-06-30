@@ -65,8 +65,9 @@ class Bot(commands.Bot):
         await self.connected_channels[0].send(text)
 
     async def join_queue(self, target):
-        self.queue.insert(0, target)
-        await self.list_queue()
+        if not target in self.queue:
+            self.queue.insert(0, target)
+            await self.list_queue()
 
     async def quit_queue(self, target):
         self.queue.remove(target)
